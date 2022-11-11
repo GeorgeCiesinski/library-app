@@ -6,19 +6,33 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+
     <header>
         <h1>Library</h1>
         <div>Dark Mode Toggle Switch</div>
     </header>
-    <div class="content">
+
+    <main> 
+        
         <button id="add-book" type="button">Add Book</button>
+
+        <div id="book-modal" class="modal">
+            <div class="modal-content">
+                <span id="close">&times;</span>
+                <p>Modal interior</p>
+            </div>
+        </div>
+
         <div id="book-shelf">
 
         </div>
-    </div>
+    </main>
+
     <footer>
         <p id="copyright-message"></p>
     </footer>
+
     <script src="js/library.js"></script>
+
 </body>
 </html>
