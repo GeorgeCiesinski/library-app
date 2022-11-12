@@ -14,11 +14,11 @@ const switchTheme = function(e) {
 
 darkModeToggle.addEventListener("change", switchTheme);
 
-// Uses desktop/browser color scheme by default
-if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-    darkModeToggle.checked = true;
-    document.documentElement.setAttribute("data-theme", "dark");
-}
+// // Uses desktop/browser color scheme by default
+// if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+//     darkModeToggle.checked = true;
+//     document.documentElement.setAttribute("data-theme", "dark");
+// }
 
 /*
 Modal
@@ -39,8 +39,8 @@ close.addEventListener("click", function() {
 });
 
 // Hide modal when outside modal clicked
-window.addEventListener("click", function() {
-    if (this.event.target == modal) {
+window.addEventListener("click", function(e) {
+    if (e.target == modal) {
         modal.style.display = "none";
     }
 });

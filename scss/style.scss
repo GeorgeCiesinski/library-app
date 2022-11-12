@@ -4,16 +4,23 @@
     --sky-color: skyblue;
     --dark-color: black;
     // Content
-    --fh-color: grey;
-    --primary-color: grey;
-    --bg-color: lightgrey;
+    --fh-color: #1b5d7a;
+    --fh-font-color: #f5fcff;
+    --button-color: #32aadf;
+    --button-font-color: #f5fcff;
+    --button-hover-color: #2a8eba;
+    --bg-color: #ebf8fe;
     --font-color: black;
     --reverse-font-color: white;
+    // Generated colors using https://javisperez.github.io/tailwindcolorshades/?picton-blue=38BDF8&minsk=312E81
 }
 
 [data-theme="dark"] {
     --fh-color: black;
-    --primary-color: lightgrey;
+    --fh-font-color: #f5fcff;
+    --button-color: lightgrey;
+    --button-font-color: black;
+    --button-hover-color: black;
     --bg-color: grey;
     --font-color: white;
     --reverse-font-color: black;
@@ -41,7 +48,7 @@ header {
     width: 100vw;
 }
 header>h1 {
-    color: var(--font-color);
+    color: var(--fh-font-color);
     margin: 20px 0px 20px 20vw;
 }
 
@@ -53,7 +60,7 @@ footer {
 }
 
 footer>p {
-    color: var(--font-color);
+    color: var(--fh-font-color);
     margin: 20px;
 }
 
@@ -64,6 +71,7 @@ footer>p {
     width: 100px;
     margin: 20px 20vw 20px 0px;
 }
+
 .toggle-switch>label {
     position: absolute;
     width: 80px;
@@ -72,13 +80,16 @@ footer>p {
     border-radius: 50px;
     cursor: pointer;
 }
+
 .toggle-switch>label>input {
     position: absolute;
     display: none;
 }
+
 .toggle-switch>label>input:checked~.slider {
     background-color: var(--sky-color);
 }
+
 .toggle-switch>label>.slider {
     position: absolute;
     width: 100%;
@@ -86,6 +97,7 @@ footer>p {
     border-radius: 50px;
     transition: 0.3s;
 }
+
 .toggle-switch>label>.slider::before {
     content: "";
     position: absolute;
@@ -98,8 +110,9 @@ footer>p {
     background-color: var(--dark-color);
     transition: 0.3s;
 }
+
 .toggle-switch>label>input:checked~.slider::before {
-    transform: translateX(40px);
+    transform: translateX(42px);
     background-color: var(--light-color);
     box-shadow: none;
 }
@@ -115,12 +128,15 @@ main {
 }
 
 #add-book {
-    color: var(--reverse-font-color);
-    background-color: var(--primary-color);
-    border: 1px solid var(--primary-color);
+    color: var(--button-font-color);
+    background-color: var(--button-color);
+    border: 1px solid var(--button-color);
     border-radius: 10px;
     margin: 10px;
     font-size: 20px;
+}
+#add-book:hover {
+    background-color: var(--button-hover-color);
 }
 
 // Modal
@@ -137,6 +153,7 @@ main {
     background-color: rgb(0, 0, 0);  // Fallback
     background-color: rgba(0, 0, 0, 0.4);  // Black with opacity
 }
+
 .modal-content {
     display: flex;
     flex-direction: column;
@@ -148,29 +165,54 @@ main {
     border-radius: 25px;
     width: 200px;
 }
+
 .modal-content>div {
     display: block;
 }
-.modal-content>h3 {
+
+.modal-content>h2 {
     color: var(--font-color);
 }
+
+.modal-content>form>div>input[type="text"] {
+    font-size: 18px;
+    background-color: var(--bg-color);
+    border: 2px solid var(--font-color);
+    border-radius: 10px;
+}
+
+.modal-content>form>div>label {
+    font-size: 18px;
+}
+
 #close {
-    color: var(--font-color);
+    color: var(--button-color);
     float: right;
     font-size: 28px;
     font-weight: bold;
 }
+
 #close:hover, close:focus {
-    color: var(--reverse-font-color);
+    color: var(--button-hover-color);
     text-decoration: none;
     cursor: pointer;
 }
+
 #book-info {
     display: flex;
     flex-direction: column;
     gap: 10px;
 }
+
 #submit {
     float: right;
+    font-size: 18px;
+    color: var(--button-font-color);
+    background-color: var(--button-color);
+    border: 1px solid var(--button-color);
+    border-radius: 25px;
+}
+#submit:hover {
+    background-color: var(--button-hover-color);
 }
 
