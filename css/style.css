@@ -1,5 +1,12 @@
 :root {
-  --footer-header: grey; }
+  --footer-header: grey;
+  --dark-primary: grey;
+  --light-primary: lightgrey;
+  --dark-text: black;
+  --light-text: white;
+  --sun-light: yellow;
+  --light: skyblue;
+  --dark: black; }
 
 * {
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; }
@@ -16,14 +23,65 @@ body {
 header {
   display: flex;
   justify-content: space-between;
-  background-color: var(--footer-header);
+  background-color: var(--dark-primary);
   width: 100vw; }
 
-header > h1, header > div {
-  margin: 20px 20vw; }
+header > h1 {
+  margin: 20px 0px 20px 20vw; }
+
+.toggle-switch {
+  position: relative;
+  width: 100px;
+  margin: 20px 20vw 20px 0px; }
+
+.toggle-switch > label {
+  position: absolute;
+  width: 80px;
+  height: 40px;
+  background-color: var(--dark);
+  border-radius: 50px;
+  cursor: pointer; }
+
+.toggle-switch > label > input {
+  position: absolute;
+  display: none; }
+
+.toggle-switch > label > input:checked ~ .slider {
+  background-color: var(--light); }
+
+.toggle-switch > label > .slider {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50px;
+  transition: 0.3s; }
+
+.toggle-switch > label > .slider::before {
+  content: "";
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  box-shadow: inset 14px -2px 0px 0px var(--sun-light);
+  background-color: var(--dark);
+  transition: 0.3s; }
+
+.toggle-switch > label > input:checked ~ .slider::before {
+  transform: translateX(40px);
+  background-color: var(--sun-light);
+  box-shadow: none; }
 
 main {
   flex: 1; }
+
+#add-book {
+  background-color: lightgrey;
+  border: 1px solid lightgrey;
+  border-radius: 10px;
+  margin: 10px;
+  font-size: 20px; }
 
 .modal {
   display: none;
@@ -39,11 +97,15 @@ main {
   background-color: rgba(0, 0, 0, 0.4); }
 
 .modal-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   background-color: #fefefe;
   margin: auto;
   padding: 20px;
   border: 1px solid black;
-  width: 80%; }
+  border-radius: 25px;
+  width: 350px; }
 
 #close {
   color: grey;

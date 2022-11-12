@@ -9,7 +9,13 @@
 
     <header>
         <h1>Library</h1>
-        <div>Dark Mode Toggle Switch</div>
+        <!--Toggle Switch-->
+        <div class="toggle-switch">
+            <label>
+                <input type="checkbox">
+                <span class="slider"></span>
+            </label>
+        </div>
     </header>
 
     <main> 
@@ -19,7 +25,10 @@
         <div id="book-modal" class="modal">
             <div class="modal-content">
                 <span id="close">&times;</span>
-                <p>Modal interior</p>
+                <h1>Add New Book</h1>
+                <form>
+                    <input type="text" name="title" id="title" placeholder="Title">
+                </form>
             </div>
         </div>
 
