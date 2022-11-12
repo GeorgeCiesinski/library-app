@@ -14,11 +14,11 @@ const switchTheme = function(e) {
 
 darkModeToggle.addEventListener("change", switchTheme);
 
-// // Uses desktop/browser color scheme by default
-// if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-//     darkModeToggle.checked = true;
-//     document.documentElement.setAttribute("data-theme", "dark");
-// }
+// Uses desktop/browser color scheme by default
+if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    darkModeToggle.checked = true;
+    document.documentElement.setAttribute("data-theme", "dark");
+}
 
 /*
 Modal
