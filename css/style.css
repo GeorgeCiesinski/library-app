@@ -89,7 +89,7 @@ footer > p {
   width: 29px;
   height: 29px;
   border-radius: 50%;
-  box-shadow: inset 14px -2px 0px 0px var(--light-color);
+  box-shadow: inset 10px -1px 0px 0px var(--light-color);
   background-color: var(--dark-color);
   transition: 0.3s; }
 
