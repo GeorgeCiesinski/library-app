@@ -30,6 +30,7 @@ header > h1 {
   margin: 20px 0px 20px 20vw; }
 
 .toggle-switch {
+  box-sizing: border-box;
   position: relative;
   width: 100px;
   margin: 20px 20vw 20px 0px; }
@@ -37,7 +38,7 @@ header > h1 {
 .toggle-switch > label {
   position: absolute;
   width: 80px;
-  height: 40px;
+  height: 100%;
   background-color: var(--dark);
   border-radius: 50px;
   cursor: pointer; }
@@ -100,12 +101,17 @@ main {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #fefefe;
+  background-color: white;
   margin: auto;
   padding: 20px;
-  border: 1px solid black;
+  border: 1px solid white;
   border-radius: 25px;
   width: 350px; }
+
+#book-info {
+  display: flex;
+  flex-direction: column;
+  gap: 10px; }
 
 #close {
   color: grey;
