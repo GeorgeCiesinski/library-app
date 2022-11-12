@@ -12,3 +12,6 @@ My main difficulty with this project was implementing a dark mode. This is my fi
 I researched further and found an [article](https://dev.to/ananyaneogi/create-a-dark-light-mode-switch-with-css-variables-34l8) by [Ananya Neogi](https://dev.to/ananyaneogi) which showed how to make a JS dark mode. This article made it really easy to understand, and it seemed to achieve the same thing as the CSS only method with only a few lines of code. After implementing the JS method, I was really happy with the result. 
 
 Lastly, I added dark mode detection following [this stack overflow](https://stackoverflow.com/questions/56393880/how-do-i-detect-dark-mode-using-javascript) answer so that the site uses the user's default theme. 
+
+### Custom Checkboxes
+I was surprised to learn that default checkboxes take a bit of work to style in CSS. I followed [this guide](https://moderncss.dev/pure-css-custom-checkbox-style/) to get the results I was looking for, and so that I can style my checkbox with light/dark mode.
