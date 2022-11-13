@@ -30,6 +30,7 @@ const inputTitle = document.querySelector("#title");
 const inputIsdn = document.querySelector("#isdn");
 const inputRead = document.querySelector("#read");
 
+// Clears modal form inputs upon close
 const clearInputs = function() {
     inputTitle.value = "";
     inputIsdn.value = "";
@@ -56,14 +57,14 @@ window.addEventListener("click", function(e) {
 });
 
 /*
+Library
+*/
+
+/*
 Copyright Message
 */
 
 // Update copyright message in dom with current year
-const updateCopyright = function() {
-    const copyrightMessage = document.querySelector("#copyright-message");
-    const currentYear = new Date().getFullYear();
-    copyrightMessage.innerHTML = `Copyright &copy ${currentYear} George Ciesinski`;
-}   
-
-updateCopyright();
+const copyrightMessage = document.querySelector("#copyright-message");
+const currentYear = new Date().getFullYear();
+copyrightMessage.innerHTML = `Copyright &copy ${currentYear} George Ciesinski`;
