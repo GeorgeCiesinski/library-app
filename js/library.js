@@ -24,18 +24,28 @@ if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').match
 Modal
 */
 const modal = document.querySelector("#book-modal");
-const addBook = document.querySelector("#add-book");
-const close = document.querySelector("#close");
+const btnAddBook = document.querySelector("#add-book");
+const btnClose = document.querySelector("#close");
+const inputTitle = document.querySelector("#title");
+const inputIsdn = document.querySelector("#isdn");
+const inputRead = document.querySelector("#read");
+
+const clearInputs = function() {
+    inputTitle.value = "";
+    inputIsdn.value = "";
+    inputRead.checked = false;
+}
 
 // Show modal
-addBook.addEventListener("click", function() {
+btnAddBook.addEventListener("click", function() {
     console.log("working");
     modal.style.display = "block";
 });
 
 // Hide modal when close clicked
-close.addEventListener("click", function() {
+btnClose.addEventListener("click", function() {
     modal.style.display = "none";
+    clearInputs();
 });
 
 // Hide modal when outside modal clicked

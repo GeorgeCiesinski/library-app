@@ -159,13 +159,11 @@ main {
   color: var(--bg-color-secondary); }
 
 #finished-reading {
+  color: var(--font-color);
   display: grid;
   grid-template-columns: max-content auto;
   gap: 10px;
   font-size: 18px; }
-
-#finished-reading {
-  color: var(--font-color); }
 
 #read {
   display: grid;

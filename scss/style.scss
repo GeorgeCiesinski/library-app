@@ -127,6 +127,7 @@ main {
     width: 100%;
 }
 
+// Add book button
 #add-book {
     color: var(--button-font-color);
     background-color: var(--button-color);
@@ -135,6 +136,7 @@ main {
     margin: 10px;
     font-size: 20px;
 }
+
 #add-book:hover {
     background-color: var(--button-hover-color);
 }
@@ -187,16 +189,15 @@ main {
     color: var(--bg-color-secondary);
 }
 
+// Finished reading checkbox
 #finished-reading {
+    color: var(--font-color);
     display: grid;  // Size checkbox with font-size
     grid-template-columns: max-content auto;
     gap: 10px;
     font-size: 18px;
 }
 
-#finished-reading {
-    color: var(--font-color);
-}
 #read {
     display: grid;
     place-content: center;
