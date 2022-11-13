@@ -9,7 +9,8 @@
     --button-color: #32aadf;
     --button-font-color: #f5fcff;
     --button-hover-color: #2a8eba;
-    --bg-color: #ebf8fe;
+    --bg-color-primary: #ebf8fe;
+    --bg-color-secondary: #74d1fa;
     --font-color: black;
     // Generated colors using https://javisperez.github.io/tailwindcolorshades/?picton-blue=38BDF8&minsk=312E81
 }
@@ -20,7 +21,8 @@
     --button-color: #2c2974;
     --button-font-color: #f5f5f9;
     --button-hover-color: #312E81;
-    --bg-color: #adabcd;
+    --bg-color-primary: #adabcd;
+    --bg-color-secondary: #6f6da7;
     --font-color: #f5f5f9;
 }
 
@@ -121,7 +123,7 @@ main {
     justify-content: center;
     align-items: flex-start;
     flex: 1;
-    background-color: var(--bg-color);
+    background-color: var(--bg-color-primary);
     width: 100%;
 }
 
@@ -156,10 +158,10 @@ main {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: var(--bg-color);
+    background-color: var(--bg-color-primary);
     margin: auto;
     padding: 20px;
-    border: 1px solid var(--bg-color);
+    border: 1px solid var(--bg-color-primary);
     border-radius: 25px;
     width: 200px;
 }
@@ -173,11 +175,16 @@ main {
 }
 
 .modal-content>form>div>input[type="text"] {
+    color: var(--font-color);
     font-size: 18px;
-    background-color: var(--bg-color);
+    background-color: var(--bg-color-primary);
     border: 2px solid var(--font-color);
     padding: 2px 10px 2px 10px;
     border-radius: 10px;
+}
+
+.modal-content>form>div>input[type="text"]::placeholder {
+    color: var(--bg-color-secondary);
 }
 
 #finished-reading {
@@ -187,17 +194,20 @@ main {
     font-size: 18px;
 }
 
+#finished-reading {
+    color: var(--font-color);
+}
 #read {
     display: grid;
     place-content: center;
     appearance: none;
-    background-color: var(--bg-color);  // Background color
+    background-color: var(--bg-color-primary);  // Background color
     margin: 0;
     font: inherit;
-    color: currentColor;
+    // color: red;
     height: 20px;
     width: 20px;
-    border: 2px solid currentColor;
+    border: 2px solid var(--font-color);
     border-radius: 5px;
 }
 #read::before {
