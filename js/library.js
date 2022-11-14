@@ -39,7 +39,6 @@ function clearInputs() {
 
 // Show modal
 btnAddBook.addEventListener("click", function() {
-    console.log("working");
     modal.style.display = "block";
 });
 
@@ -53,6 +52,7 @@ btnClose.addEventListener("click", function() {
 window.addEventListener("click", function(e) {
     if (e.target == modal) {
         modal.style.display = "none";
+        clearInputs();
     }
 });
 
@@ -60,22 +60,40 @@ window.addEventListener("click", function(e) {
 Library
 */
 
-let library = [];
+const formBookInfo = document.querySelector("#book-info");
 
+let library = [];  // Library array
+
+// Book object constructor
 function book(title, isdn, read) {
     this.title = title;
     this.isdn = isdn;
     this.read = read;
 }
 
+// Adds book to library
 book.prototype.addToLibrary = function() {
     library.push(this);
     console.log(library);
 }
 
+// Removes book from library
 book.prototype.removeFromLibrary = function() {
     // Remove
 }
+
+// Gets submitted data from form
+function getData(form) {
+    const formData = new FormData(form);
+    return Object.fromEntries(formData);
+}
+
+// Adds event listener for submit event
+formBookInfo.addEventListener("submit", function(e) {
+    e.preventDefault();
+    const formObject = getData(e.target);
+    console.log(formObject);
+});
 
 /*
 Copyright Message
