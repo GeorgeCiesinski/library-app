@@ -42,17 +42,21 @@ btnAddBook.addEventListener("click", function() {
     modal.style.display = "block";
 });
 
-// Hide modal when close clicked
-btnClose.addEventListener("click", function() {
+// Hide modal
+function hideModal() {
     modal.style.display = "none";
     clearInputs();
+}
+
+// Hide modal when close clicked
+btnClose.addEventListener("click", function() {
+    hideModal();
 });
 
 // Hide modal when outside modal clicked
 window.addEventListener("click", function(e) {
     if (e.target == modal) {
-        modal.style.display = "none";
-        clearInputs();
+        hideModal();
     }
 });
 
@@ -92,7 +96,10 @@ function getData(form) {
 formBookInfo.addEventListener("submit", function(e) {
     e.preventDefault();
     const formObject = getData(e.target);
-    console.log(formObject);
+    // console.log(formObject);
+    const newBook = new book(formObject.title, formObject.isdn, formObject.read);
+    newBook.addToLibrary();
+    hideModal();
 });
 
 /*
