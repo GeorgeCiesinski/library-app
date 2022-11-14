@@ -1,4 +1,10 @@
 :root {
+    // Margins
+    --margin-size: 20vw;
+    --mid-size: 60vw;
+    // Book Ratio
+    --book-width: 200px;
+    --book-height-ratio: 1.5;
     // Toggle
     --light-color: yellow;
     --sky-color: skyblue;
@@ -31,13 +37,12 @@
 }
 
 body {
-    height: 100vh;
-    margin: 0;
-    padding: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
-    min-height: 100%;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
 }
 
 // Header & Footer
@@ -49,7 +54,7 @@ header {
 }
 header>h1 {
     color: var(--fh-font-color);
-    margin: 20px 0px 20px 20vw;
+    margin: 20px 0px 20px var(--margin-size);
 }
 
 footer {
@@ -66,18 +71,20 @@ footer>p {
 
 // Toggle Switch
 .toggle-switch {
+    display: flex;
+    justify-content: flex-end;
     box-sizing: border-box;
     position: relative;
     width: 100px;
-    margin: 20px 20vw 20px 0px;
+    margin: 20px var(--margin-size) 20px 0px;
 }
 
 .toggle-switch>label {
     position: absolute;
     width: 80px;
     height: 100%;
-    background-color: var(--dark-color);
     border-radius: 50px;
+    background-color: var(--dark-color);
     cursor: pointer;
 }
 
@@ -119,10 +126,11 @@ footer>p {
 
 // Main
 main {
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
     flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
     background-color: var(--bg-color-primary);
     width: 100%;
 }
@@ -254,3 +262,16 @@ main {
     background-color: var(--button-hover-color);
 }
 
+#book-shelf {
+    display: grid;
+    width: var(--mid-size);
+    margin: 5px var(--margin-size) 5px var(--margin-size);
+    grid-template-columns: repeat(auto-fill, minmax(var(--book-width), 1fr));
+    grid-auto-rows: minmax(calc(var(--book-width) * var(--book-height-ratio)), 1fr);
+    gap: 10px;
+}
+
+.book {
+    background-color: red;
+    border: 1px solid black;
+}

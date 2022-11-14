@@ -14,7 +14,7 @@ function switchTheme(e) {
 
 darkModeToggle.addEventListener("change", switchTheme);
 
-// Uses desktop/browser color scheme by default
+// Use desktop/browser color scheme by default
 if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
     darkModeToggle.checked = true;
     document.documentElement.setAttribute("data-theme", "dark");
@@ -70,15 +70,54 @@ let library = [];  // Library array
 
 // Book object constructor
 function book(title, isdn, read) {
-    this.title = title;
-    this.isdn = isdn;
-    this.read = read;
+    
+    if (title != "undefined" && isdn != "") {
+        this.title = title;
+    } else {
+        this.title = "";
+    }
+    
+    if (isdn != "undefined" && isdn != "") {
+        this.isdn = isdn;
+    } else {
+        this.isdn = "";
+    }
+
+    if (read != "0") {
+        this.read = true;
+    } else {
+        this.read = false;
+    }
 }
 
 // Adds book to library
 book.prototype.addToLibrary = function() {
     library.push(this);
+    displayBooks();
     console.log(library);
+}
+
+const bookShelf = document.querySelector("#book-shelf");
+
+// Removes bookshelf children
+function clearBookshelf() {
+    while (bookShelf.firstChild) {
+        bookShelf.removeChild(bookShelf.lastChild);
+    }
+}
+
+// Builds or rebuilds bookshelf
+function displayBooks() {
+
+    clearBookshelf();
+
+    for (i=0; i<library.length; i++) {
+        const newCard = document.createElement("div");
+        newCard.setAttribute("lib-index", i);
+        newCard.classList.add("book");
+        bookShelf.appendChild(newCard);
+    }
+    
 }
 
 // Removes book from library
@@ -92,11 +131,11 @@ function getData(form) {
     return Object.fromEntries(formData);
 }
 
-// Adds event listener for submit event
+// Get form data and preventDefault behavior
 formBookInfo.addEventListener("submit", function(e) {
     e.preventDefault();
     const formObject = getData(e.target);
-    // console.log(formObject);
+    console.log(formObject);
     const newBook = new book(formObject.title, formObject.isdn, formObject.read);
     newBook.addToLibrary();
     hideModal();
