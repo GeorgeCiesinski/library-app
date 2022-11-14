@@ -4,7 +4,7 @@ Dark Mode
 
 const darkModeToggle = document.querySelector(".toggle-switch>label>input");
 
-const switchTheme = function(e) {
+function switchTheme(e) {
     if (e.target.checked) {
         document.documentElement.setAttribute("data-theme", "dark");
     } else {
@@ -31,7 +31,7 @@ const inputIsdn = document.querySelector("#isdn");
 const inputRead = document.querySelector("#read");
 
 // Clears modal form inputs upon close
-const clearInputs = function() {
+function clearInputs() {
     inputTitle.value = "";
     inputIsdn.value = "";
     inputRead.checked = false;
@@ -59,6 +59,23 @@ window.addEventListener("click", function(e) {
 /*
 Library
 */
+
+let library = [];
+
+function book(title, isdn, read) {
+    this.title = title;
+    this.isdn = isdn;
+    this.read = read;
+}
+
+book.prototype.addToLibrary = function() {
+    library.push(this);
+    console.log(library);
+}
+
+book.prototype.removeFromLibrary = function() {
+    // Remove
+}
 
 /*
 Copyright Message
