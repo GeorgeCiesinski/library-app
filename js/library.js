@@ -93,36 +93,47 @@ function book(title, isdn, read) {
 // Adds book to library
 book.prototype.addToLibrary = function() {
     library.push(this);
-    displayBooks();
-    console.log(library);
+    updateBookshelf();
 }
 
 const bookShelf = document.querySelector("#book-shelf");
 
-// Removes bookshelf children
+// Removes all bookshelf children
 function clearBookshelf() {
     while (bookShelf.firstChild) {
         bookShelf.removeChild(bookShelf.lastChild);
     }
 }
 
-// Builds or rebuilds bookshelf
-function displayBooks() {
+// Builds bookshelf from array items
+function updateBookshelf() {
 
     clearBookshelf();
 
     for (i=0; i<library.length; i++) {
-        const newCard = document.createElement("div");
-        newCard.setAttribute("lib-index", i);
-        newCard.classList.add("book");
-        bookShelf.appendChild(newCard);
+        createBookElement(i);
     }
     
 }
 
-// Removes book from library
-book.prototype.removeFromLibrary = function() {
-    // Remove
+// Creates a new book element
+function createBookElement(libraryIndex) {
+    const newCard = document.createElement("div");
+    const closeButton = document.createElement("button");
+    
+    closeButton.innerHTML = "Remove Book";
+    closeButton.addEventListener("click", removeBook);
+    newCard.appendChild(closeButton);
+    newCard.setAttribute("lib-index", libraryIndex);
+    newCard.classList.add("book");
+    bookShelf.appendChild(newCard);
+}
+
+function removeBook(e) {
+    const bookCard = this.parentNode;
+    const bookIndex = bookCard.getAttribute("lib-index");
+    library.splice(bookIndex, 1);
+    updateBookshelf();
 }
 
 // Gets submitted data from form
@@ -133,9 +144,8 @@ function getData(form) {
 
 // Get form data and preventDefault behavior
 formBookInfo.addEventListener("submit", function(e) {
-    e.preventDefault();
+    e.preventDefault();  // Prevent form from submitting
     const formObject = getData(e.target);
-    console.log(formObject);
     const newBook = new book(formObject.title, formObject.isdn, formObject.read);
     newBook.addToLibrary();
     hideModal();
