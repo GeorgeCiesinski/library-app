@@ -27,13 +27,13 @@ const modal = document.querySelector("#book-modal");
 const btnAddBook = document.querySelector("#add-book");
 const btnClose = document.querySelector("#close");
 const inputTitle = document.querySelector("#title");
-const inputIsdn = document.querySelector("#isdn");
+const inputisbn = document.querySelector("#isbn");
 const inputRead = document.querySelector("#read");
 
 // Clears modal form inputs upon close
 function clearInputs() {
     inputTitle.value = "";
-    inputIsdn.value = "";
+    inputisbn.value = "";
     inputRead.checked = false;
 }
 
@@ -69,18 +69,18 @@ const formBookInfo = document.querySelector("#book-info");
 let library = [];  // Library array
 
 // Book object constructor
-function book(title, isdn, read) {
+function book(title, isbn, read) {
     
-    if (title != "undefined" && isdn != "") {
+    if (title != "undefined" && title != "") {
         this.title = title;
     } else {
         this.title = "";
     }
     
-    if (isdn != "undefined" && isdn != "") {
-        this.isdn = isdn;
+    if (isbn != "undefined" && isbn != "") {
+        this.isbn = isbn;
     } else {
-        this.isdn = "";
+        this.isbn = "";
     }
 
     if (read != "0") {
@@ -118,12 +118,32 @@ function updateBookshelf() {
 
 // Creates a new book element
 function createBookElement(libraryIndex) {
+    const book = library.at(libraryIndex);
+
+    // Create card base element
     const newCard = document.createElement("div");
-    const closeButton = document.createElement("button");
-    
-    closeButton.innerHTML = "Remove Book";
-    closeButton.addEventListener("click", removeBook);
-    newCard.appendChild(closeButton);
+
+    // Add book image
+    const image = document.createElement("img");
+    image.src = `https://covers.openlibrary.org/b/isbn/${book.isbn}-L.jpg`;
+    newCard.appendChild(image);
+
+    // Add book title
+    const header = document.createElement("h3");
+    header.innerHTML = book.title;
+    newCard.appendChild(header);
+
+    // Add book isbn
+    const isbn = document.createElement("h3");
+    isbn.innerHTML = book.isbn;
+    newCard.appendChild(isbn);
+
+    // Add remove button
+    const removeButton = document.createElement("button");
+    removeButton.innerHTML = "Remove";
+    removeButton.addEventListener("click", removeBook);
+    newCard.appendChild(removeButton);
+
     newCard.setAttribute("lib-index", libraryIndex);
     newCard.classList.add("book");
     bookShelf.appendChild(newCard);
@@ -146,7 +166,7 @@ function getData(form) {
 formBookInfo.addEventListener("submit", function(e) {
     e.preventDefault();  // Prevent form from submitting
     const formObject = getData(e.target);
-    const newBook = new book(formObject.title, formObject.isdn, formObject.read);
+    const newBook = new book(formObject.title, formObject.isbn, formObject.read);
     newBook.addToLibrary();
     hideModal();
 });

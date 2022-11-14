@@ -230,5 +230,11 @@ main {
   gap: 10px; }
 
 .book {
+  display: flex;
+  flex-direction: column;
   background-color: red;
   border: 1px solid black; }
+
+.book > img {
+  object-fit: cover;
+  width: 100%; }
