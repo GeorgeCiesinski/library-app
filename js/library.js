@@ -27,13 +27,13 @@ const modal = document.querySelector("#book-modal");
 const btnAddBook = document.querySelector("#add-book");
 const btnClose = document.querySelector("#close");
 const inputTitle = document.querySelector("#title");
-const inputisbn = document.querySelector("#isbn");
+const inputIsbn = document.querySelector("#isbn");
 const inputRead = document.querySelector("#read");
 
 // Clears modal form inputs upon close
 function clearInputs() {
     inputTitle.value = "";
-    inputisbn.value = "";
+    inputIsbn.value = "";
     inputRead.checked = false;
 }
 
@@ -64,39 +64,93 @@ window.addEventListener("click", function(e) {
 Library
 */
 
-const formBookInfo = document.querySelector("#book-info");
-
 let library = [];  // Library array
+const formBookInfo = document.querySelector("#book-info");
+const bookShelf = document.querySelector("#book-shelf");
+
+// Get form data and preventDefault behavior
+formBookInfo.addEventListener("submit", function(e) {
+    e.preventDefault();  // Prevent form from submitting
+    const formObject = getData(e.target);
+    const newBook = new book(formObject.title, formObject.isbn, formObject.read);
+    newBook.addToLibrary();
+    hideModal();
+});
+
+// Gets submitted data from form
+function getData(form) {
+    const formData = new FormData(form);
+    return Object.fromEntries(formData);
+}
 
 // Book object constructor
 function book(title, isbn, read) {
-    
-    if (title != "undefined" && title != "") {
+
+    if (title) {
         this.title = title;
     } else {
         this.title = "";
     }
-    
-    if (isbn != "undefined" && isbn != "") {
+
+    if (isbn) {
         this.isbn = isbn;
     } else {
         this.isbn = "";
     }
 
-    if (read != "0") {
-        this.read = true;
-    } else {
-        this.read = false;
-    }
+    this.cover = null;
+    this.data = null;
+    this.read = read ? true : false;
+
 }
 
+
+
 // Adds book to library
-book.prototype.addToLibrary = function() {
-    library.push(this);
+book.prototype.addToLibrary = async function() {
+
+    if (this.isbn) {
+        const url = "https://openlibrary.org/isbn/" + this.isbn + ".json";
+
+        fetch(url)
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error("OpenLibrary response was not ok.")
+                }
+                return response.json();
+            })
+            .then((bookData) => {
+                this.title = bookData.title;
+                this.cover = "https://covers.openlibrary.org/b/id/" + bookData.covers[0] + "-L.jpg"
+                this.data = bookData;
+                library.push(this);
+                updateBookshelf();
+            })
+            .catch((error) => console.error("Failed to fetch book data:", error));
+    } else {
+        library.push(this);
+        updateBookshelf();
+    }
+    
+}
+
+// Remove book from library
+function removeBook(e) {
+    const bookCard = this.parentNode;
+    const bookIndex = bookCard.getAttribute("lib-index");
+    library.splice(bookIndex, 1);
     updateBookshelf();
 }
 
-const bookShelf = document.querySelector("#book-shelf");
+// Builds bookshelf from array items
+function updateBookshelf() {
+    // Clear existing elements from bookshelf
+    clearBookshelf();
+    // Iterate through library and build book elements
+    for (i=0; i<library.length; i++) {
+        createBookElement(i);
+    }
+}
 
 // Removes all bookshelf children
 function clearBookshelf() {
@@ -105,19 +159,9 @@ function clearBookshelf() {
     }
 }
 
-// Builds bookshelf from array items
-function updateBookshelf() {
-
-    clearBookshelf();
-
-    for (i=0; i<library.length; i++) {
-        createBookElement(i);
-    }
-    
-}
-
 // Creates a new book element
 function createBookElement(libraryIndex) {
+
     const book = library.at(libraryIndex);
 
     // Create card base element
@@ -125,7 +169,11 @@ function createBookElement(libraryIndex) {
 
     // Add book image
     const image = document.createElement("img");
-    image.src = `https://covers.openlibrary.org/b/isbn/${book.isbn}-L.jpg`;
+    if (book.cover) {
+        image.src = book.cover;
+    } else {
+        image.src = "images/no-cover.jpg";
+    }
     newCard.appendChild(image);
 
     // Add book title
@@ -149,33 +197,13 @@ function createBookElement(libraryIndex) {
     bookShelf.appendChild(newCard);
 }
 
-function removeBook(e) {
-    const bookCard = this.parentNode;
-    const bookIndex = bookCard.getAttribute("lib-index");
-    library.splice(bookIndex, 1);
-    updateBookshelf();
-}
-
-// Gets submitted data from form
-function getData(form) {
-    const formData = new FormData(form);
-    return Object.fromEntries(formData);
-}
-
-// Get form data and preventDefault behavior
-formBookInfo.addEventListener("submit", function(e) {
-    e.preventDefault();  // Prevent form from submitting
-    const formObject = getData(e.target);
-    const newBook = new book(formObject.title, formObject.isbn, formObject.read);
-    newBook.addToLibrary();
-    hideModal();
-});
-
 /*
 Copyright Message
 */
 
 // Update copyright message in dom with current year
-const copyrightMessage = document.querySelector("#copyright-message");
-const currentYear = new Date().getFullYear();
-copyrightMessage.innerHTML = `Copyright &copy ${currentYear} George Ciesinski`;
+(function addCopyright() {
+    const copyrightMessage = document.querySelector("#copyright-message");
+    const currentYear = new Date().getFullYear();
+    copyrightMessage.innerHTML = `Copyright &copy ${currentYear} George Ciesinski`;
+})();  // Self invokes
