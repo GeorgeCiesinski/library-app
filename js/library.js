@@ -94,7 +94,7 @@ function book(title, isbn, read) {
     }
 
     if (isbn) {
-        this.isbn = isbn;
+        this.isbn = isbn.replace(/-|\s/g,"");  // Removes spaces and dashes
     } else {
         this.isbn = "";
     }
@@ -112,24 +112,34 @@ book.prototype.addToLibrary = async function() {
     if (this.isbn) {
         const url = "https://openlibrary.org/isbn/" + this.isbn + ".json";
 
+        // Fetches information from Open Library
         fetch(url)
             .then((response) => {
                 if (!response.ok) {
-                    throw new Error("OpenLibrary response was not ok.")
+                    // Promise is rejected if 2xx response not received
+                    throw new Error("Not 2xx response", {cause: response});
                 }
                 return response.json();
             })
+            // Updates object data with information from Open Library
             .then((bookData) => {
-                this.title = bookData.title;
+                this.title = bookData.title;  // Overwrites title with accurate title
                 this.cover = "https://covers.openlibrary.org/b/id/" + bookData.covers[0] + "-L.jpg"
-                this.data = bookData;
+                this.data = bookData;  // Saves book data in library
                 library.push(this);
                 updateBookshelf();
             })
-            .catch((error) => console.error("Failed to fetch book data:", error));
-    } else {
+            .catch((error) => {
+                console.error("Failed to fetch book data:", error)
+                window.alert("Failed to fetch book information from Open Library. Check that the ISBN is correct.")
+            });
+    } else if (!this.isbn && this.title) {
+        // If no ISBN, push data as is
         library.push(this);
         updateBookshelf();
+    }
+    else if (!this.isbn && !this.title) {
+        window.alert("You must provide an ISBN or a title to add a book.")
     }
     
 }
@@ -170,6 +180,7 @@ function createBookElement(libraryIndex) {
 
     // Info Div
     const infoDiv = document.createElement("div");
+    infoDiv.classList.add("info-div");
 
     // Add book title
     const header = document.createElement("h3");
