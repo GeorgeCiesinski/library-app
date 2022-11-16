@@ -252,18 +252,16 @@ main {
   object-fit: contain;
   padding: 5px; }
 
-.book > h3, .book > h4 {
-  color: var(--font-color);
-  margin: 0;
-  padding: 0px 5px 5px 5px; }
-
-.book > a {
+.book > div > h3, .book > div > h4, .book > div > a {
   margin: 0px 5px 5px 5px; }
+
+.book > div > h3, .book > div > h4 {
+  color: var(--font-color); }
 
 .book-buttons {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  margin: 0px 5px 5px 5px;
+  margin: 5px;
   gap: 5px; }
 
 .book-buttons > button {

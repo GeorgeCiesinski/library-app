@@ -168,6 +168,9 @@ function createBookElement(libraryIndex) {
     }
     newCard.appendChild(image);
 
+    // Info Div
+    const infoDiv = document.createElement("div");
+
     // Add book title
     const header = document.createElement("h3");
     if (book.title) {
@@ -175,7 +178,7 @@ function createBookElement(libraryIndex) {
     } else {
         header.innerHTML = "No Title Provided";
     }
-    newCard.appendChild(header);
+    infoDiv.appendChild(header);
 
     // Add book isbn & OpenLibrary link
     if (book.isbn) {
@@ -189,10 +192,9 @@ function createBookElement(libraryIndex) {
         openLibrary.title = "Open Library Link";
         openLibrary.href = "https://openlibrary.org/isbn/" + book.isbn;
         // Append to card
-        newCard.appendChild(isbn);
-        newCard.appendChild(openLibrary);
+        infoDiv.appendChild(isbn);
+        infoDiv.appendChild(openLibrary);
     } 
-    
 
     // Book button container
     const bookButtons = document.createElement("div");
@@ -216,13 +218,19 @@ function createBookElement(libraryIndex) {
     removeButton.addEventListener("click", removeBook);
     bookButtons.appendChild(removeButton);
 
-    // Add book button container to card
-    newCard.appendChild(bookButtons);
+    // Add book button container to infoDiv
+    infoDiv.appendChild(bookButtons);
+
+    // Append infoDiv to card
+    newCard.appendChild(infoDiv);
 
     // Set attribute and class
     newCard.setAttribute("lib-index", libraryIndex);
     newCard.classList.add("book");
+
+    // Add to bookshelf
     bookShelf.appendChild(newCard);
+
 }
 
 // Toggle book read
@@ -248,7 +256,7 @@ function removeBook(e) {
 }
 
 function getBookIndex(element) {
-    const bookCard = element.parentNode.parentNode;  // Get book card
+    const bookCard = element.parentNode.parentNode.parentNode;  // Get book card
     return bookCard.getAttribute("lib-index");  // Return library index
 }
 
