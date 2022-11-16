@@ -72,6 +72,7 @@ const bookShelf = document.querySelector("#book-shelf");
 formBookInfo.addEventListener("submit", function(e) {
     e.preventDefault();  // Prevent form from submitting
     const formObject = getData(e.target);
+    console.log(formObject);
     const newBook = new book(formObject.title, formObject.isbn, formObject.read);
     newBook.addToLibrary();
     hideModal();
@@ -98,13 +99,12 @@ function book(title, isbn, read) {
         this.isbn = "";
     }
 
+    this.read = (read == "1") ? true : false;
+
+    // Null properties - updated later
     this.cover = null;
     this.data = null;
-    this.read = read ? true : false;
-
 }
-
-
 
 // Adds book to library
 book.prototype.addToLibrary = async function() {
@@ -192,7 +192,11 @@ function createBookElement(libraryIndex) {
 
     // Add Read / Not Read button
     const readButton = document.createElement("button");
-    readButton.innerHTML = "Read";
+    if (book.read) {
+        readButton.innerHTML = "Read";
+    } else {
+        readButton.innerHTML = "Not Read";
+    }
     readButton.addEventListener("click", toggleRead);
     bookButtons.appendChild(readButton);
 
@@ -216,9 +220,9 @@ function toggleRead(e) {
 
 // Remove book from library
 function removeBook(e) {
-    const bookCard = this.parentNode;
-    const bookIndex = bookCard.getAttribute("lib-index");
-    library.splice(bookIndex, 1);
+    const bookCard = this.parentNode.parentNode;  // Get book card
+    const bookIndex = bookCard.getAttribute("lib-index");  // Get library index
+    library.splice(bookIndex, 1);  // Remove from library
     updateBookshelf();
 }
 
