@@ -134,14 +134,6 @@ book.prototype.addToLibrary = async function() {
     
 }
 
-// Remove book from library
-function removeBook(e) {
-    const bookCard = this.parentNode;
-    const bookIndex = bookCard.getAttribute("lib-index");
-    library.splice(bookIndex, 1);
-    updateBookshelf();
-}
-
 // Builds bookshelf from array items
 function updateBookshelf() {
     // Clear existing elements from bookshelf
@@ -178,23 +170,56 @@ function createBookElement(libraryIndex) {
 
     // Add book title
     const header = document.createElement("h3");
-    header.innerHTML = book.title;
+    if (book.title) {
+        header.innerHTML = book.title;
+    } else {
+        header.innerHTML = "No Title Provided";
+    }
     newCard.appendChild(header);
 
     // Add book isbn
-    const isbn = document.createElement("h3");
-    isbn.innerHTML = book.isbn;
+    const isbn = document.createElement("h4");
+    if (book.isbn) {
+        isbn.innerHTML = "ISBN: " + book.isbn;
+    } else {
+        isbn.innerHTML = "No ISBN provided";
+    }
     newCard.appendChild(isbn);
+
+    // Book button container
+    const bookButtons = document.createElement("div");
+    bookButtons.classList.add("book-buttons"); 
+
+    // Add Read / Not Read button
+    const readButton = document.createElement("button");
+    readButton.innerHTML = "Read";
+    readButton.addEventListener("click", toggleRead);
+    bookButtons.appendChild(readButton);
 
     // Add remove button
     const removeButton = document.createElement("button");
     removeButton.innerHTML = "Remove";
     removeButton.addEventListener("click", removeBook);
-    newCard.appendChild(removeButton);
+    bookButtons.appendChild(removeButton);
+
+    newCard.appendChild(bookButtons);
 
     newCard.setAttribute("lib-index", libraryIndex);
     newCard.classList.add("book");
     bookShelf.appendChild(newCard);
+}
+
+// Toggle book read
+function toggleRead(e) {
+    console.log("working");
+}
+
+// Remove book from library
+function removeBook(e) {
+    const bookCard = this.parentNode;
+    const bookIndex = bookCard.getAttribute("lib-index");
+    library.splice(bookIndex, 1);
+    updateBookshelf();
 }
 
 /*

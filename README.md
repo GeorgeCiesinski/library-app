@@ -4,7 +4,7 @@ Library app built as an assignment for The Odin Project
 ## Project Information
 This app makes use of object constructors to create new books and load them into the bookshelf. 
 
-## Difficulties Encountered
+## Problems & Solutions
 
 ### Dark Mode & Toggle
 My main difficulty with this project was implementing a dark mode. This is my first dark mode in any project. I couldn't decide at first if I wanted a CSS only dark mode, or if I wanted to use JS. After spending some time researching it I realized that the CSS only dark mode would not be well suited for the project. Since it worked by placing the dark-mode input first in the webpage and using the CSS selector `#dark-mode:checked ~ *`, it meant that I had to structure the page in a specific way for it to work, and would add difficulties styling it so the toggle appeared where I wanted it. In short, it would take a ton of code.
@@ -15,3 +15,9 @@ Lastly, I added dark mode detection following [this stack overflow](https://stac
 
 ### Custom Checkboxes
 I was surprised to learn that default checkboxes take a bit of work to style in CSS. I followed [this guide](https://moderncss.dev/pure-css-custom-checkbox-style/) to get the results I was looking for, and so that I can style my checkbox with light/dark mode.
+
+### Grid Layout
+I experienced some difficulty building a dynamic grid. While the first row worked nicely, the subsequent rows were the wrong size. I ended up opening a stack [overflow question](https://stackoverflow.com/questions/74437533/grid-is-not-sizing-correctly-in-row-direction) and after some further research, I resolved the problem myself. Feel free to check out the question if you want to see the issue in more detail and the solution. 
+
+### Fetching Book Data
+I used the [Open Library](https://openlibrary.org/) API to fetch book data such as the title and cover image using the ISBN. It took a bit of research, but I learned how to fetch the `json` from the API and use an async function to update the bookshelf with the data. Based on this issue, I need to study the [promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) in more detail. 

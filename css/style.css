@@ -229,12 +229,29 @@ main {
   grid-auto-rows: minmax(calc(var(--book-width) * var(--book-height-ratio)), 1fr);
   gap: 10px; }
 
+.book, .book > img {
+  border-radius: 10px; }
+
 .book {
   display: flex;
   flex-direction: column;
-  background-color: red;
-  border: 1px solid black; }
+  justify-content: space-between;
+  background-color: var(--bg-color-secondary);
+  border: 1px solid var(--bg-color-secondary); }
 
 .book > img {
-  object-fit: cover;
-  width: 100%; }
+  object-fit: contain;
+  padding: 5px; }
+
+.book > h3, .book > h4 {
+  color: var(--font-color);
+  margin: 0;
+  padding: 0px 5px 5px 5px; }
+
+.book-buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr; }
+
+.book-buttons > button {
+  height: 30px;
+  margin: 0px 5px 5px 5px; }

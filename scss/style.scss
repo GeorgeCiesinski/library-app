@@ -197,7 +197,6 @@ main {
     color: var(--bg-color-secondary);
 }
 
-// Finished reading checkbox
 #finished-reading {
     color: var(--font-color);
     display: grid;  // Size checkbox with font-size
@@ -213,7 +212,6 @@ main {
     background-color: var(--bg-color-primary);  // Background color
     margin: 0;
     font: inherit;
-    // color: red;
     height: 20px;
     width: 20px;
     border: 2px solid var(--font-color);
@@ -262,6 +260,7 @@ main {
     background-color: var(--button-hover-color);
 }
 
+// Book and Bookshelf
 #book-shelf {
     display: grid;
     width: var(--mid-size);
@@ -271,14 +270,37 @@ main {
     gap: 10px;
 }
 
+.book, .book>img {
+    border-radius: 10px;
+}
+
 .book {
     display: flex;
     flex-direction: column;
-    background-color: red;
-    border: 1px solid black;
+    justify-content: space-between;
+    background-color: var(--bg-color-secondary);
+    border: 1px solid var(--bg-color-secondary);
 }
 
 .book>img {
-    object-fit: cover;
-    width: 100%;
+    object-fit: contain;
+    padding: 5px;
+}
+
+.book>h3, .book>h4 {
+    color: var(--font-color);
+    margin: 0;
+    padding: 0px 5px 5px 5px;
+}
+
+.book-buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.book-buttons>button {
+    // align-self: end;
+    height: 30px;
+    // width: 75px;
+    margin: 0px 5px 5px 5px;
 }
