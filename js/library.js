@@ -184,16 +184,17 @@ function createBookElement(libraryIndex) {
     if (book.isbn) {
         // ISBN info
         const isbn = document.createElement("h4");
-        isbn.innerHTML = "ISBN: " + book.isbn;
+        isbn.innerHTML = "ISBN: ";
         // OpenLibrary info
         const openLibrary = document.createElement("a");
-        const linkText = document.createTextNode("View in OpenLibrary");
+        const linkText = document.createTextNode(book.isbn);
         openLibrary.appendChild(linkText);
         openLibrary.title = "Open Library Link";
         openLibrary.href = "https://openlibrary.org/isbn/" + book.isbn;
+        openLibrary.classList.add("open-library-link");
         // Append to card
         infoDiv.appendChild(isbn);
-        infoDiv.appendChild(openLibrary);
+        isbn.appendChild(openLibrary);
     } 
 
     // Book button container
@@ -215,6 +216,7 @@ function createBookElement(libraryIndex) {
     // Add remove button
     const removeButton = document.createElement("button");
     removeButton.innerHTML = "Remove";
+    removeButton.classList.add("remove");
     removeButton.addEventListener("click", removeBook);
     bookButtons.appendChild(removeButton);
 
@@ -230,7 +232,6 @@ function createBookElement(libraryIndex) {
 
     // Add to bookshelf
     bookShelf.appendChild(newCard);
-
 }
 
 // Toggle book read

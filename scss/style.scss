@@ -11,24 +11,28 @@
     --dark-color: black;
     // Content
     --fh-color: #1b5d7a;
-    --fh-font-color: #f5fcff;
-    --button-color: #32aadf;
+    --fh-font-color: #cdeffd;
+    --placeholder-color: #74d1fa;
+    --button-color: #227195;
     --button-hover-color: #2a8eba;
-    --read-color: #38BDF8;
     --button-font-color: #f5fcff;
-    --bg-color-primary: #ebf8fe;
-    --bg-color-secondary: #74d1fa;
+    --read-color: #1fb155;
+    --remove-color: #c62222;
+    --bg-color-primary: #cdeffd;
+    --bg-color-secondary: #afe5fc;
     --font-color: black;
-    // Generated colors using https://javisperez.github.io/tailwindcolorshades/?picton-blue=38BDF8&minsk=312E81
+    // Generated colors using https://javisperez.github.io/tailwindcolorshades/?emerald=22C55E&picton-blue=38BDF8&minsk=312E81
 }
 
 [data-theme="dark"] {
     --fh-color: #18173f;
-    --fh-font-color: #eaeaf2;
-    --button-color: #2c2974;
+    --fh-font-color: #cccbe0;
+    --placeholder-color: #6f6da7;
+    --button-color: #1d1c4d;
     --button-hover-color: #312E81;
-    --read-color: #6f6da7;
     --button-font-color: #f5f5f9;
+    --read-color: #1a9447;
+    --remove-color: #a51d1d;
     --bg-color-primary: #adabcd;
     --bg-color-secondary: #6f6da7;
     --font-color: #f5f5f9;
@@ -152,6 +156,7 @@ main {
 
 #add-book:hover {
     background-color: var(--button-hover-color);
+    border: 1px solid var(--button-hover-color);
 }
 
 // Modal
@@ -199,7 +204,8 @@ main {
 }
 
 .modal-content>form>div>input[type="text"]::placeholder {
-    color: var(--bg-color-secondary);
+    color: var(--placeholder-color);
+    font-weight: bold;
 }
 
 #finished-reading {
@@ -290,7 +296,7 @@ main {
     flex-direction: column;
     justify-content: space-between;
     background-color: var(--bg-color-secondary);
-    border: 1px solid var(--bg-color-secondary);
+    border: 2px solid var(--button-color);
 }
 
 .book>img {
@@ -314,7 +320,7 @@ main {
 }
 
 .book-buttons>button {
-    color: var(--font-color);
+    color: var(--button-font-color);
     background-color: var(--button-color);
     border: 2px solid var(--button-color);
     border-radius: 10px;
@@ -322,9 +328,11 @@ main {
 }
 
 button[is-read="true"] {
-    
+    background-color: var(--read-color);
+    border: 2px solid var(--read-color);
 }
 
-button[is-read="false"] {
-    background-color: var(--read-color);
+button.remove {
+    background-color: var(--remove-color);
+    border: 2px solid var(--remove-color);
 }
