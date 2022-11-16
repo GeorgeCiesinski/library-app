@@ -177,14 +177,22 @@ function createBookElement(libraryIndex) {
     }
     newCard.appendChild(header);
 
-    // Add book isbn
-    const isbn = document.createElement("h4");
+    // Add book isbn & OpenLibrary link
     if (book.isbn) {
+        // ISBN info
+        const isbn = document.createElement("h4");
         isbn.innerHTML = "ISBN: " + book.isbn;
-    } else {
-        isbn.innerHTML = "No ISBN provided";
-    }
-    newCard.appendChild(isbn);
+        // OpenLibrary info
+        const openLibrary = document.createElement("a");
+        const linkText = document.createTextNode("View in OpenLibrary");
+        openLibrary.appendChild(linkText);
+        openLibrary.title = "Open Library Link";
+        openLibrary.href = "https://openlibrary.org/isbn/" + book.isbn;
+        // Append to card
+        newCard.appendChild(isbn);
+        newCard.appendChild(openLibrary);
+    } 
+    
 
     // Book button container
     const bookButtons = document.createElement("div");
@@ -193,9 +201,11 @@ function createBookElement(libraryIndex) {
     // Add Read / Not Read button
     const readButton = document.createElement("button");
     if (book.read) {
+        readButton.setAttribute("is-read", "true");
         readButton.innerHTML = "Read";
     } else {
-        readButton.innerHTML = "Not Read";
+        readButton.setAttribute("is-read", "false");
+        readButton.innerHTML = "Unread";
     }
     readButton.addEventListener("click", toggleRead);
     bookButtons.appendChild(readButton);
@@ -206,8 +216,10 @@ function createBookElement(libraryIndex) {
     removeButton.addEventListener("click", removeBook);
     bookButtons.appendChild(removeButton);
 
+    // Add book button container to card
     newCard.appendChild(bookButtons);
 
+    // Set attribute and class
     newCard.setAttribute("lib-index", libraryIndex);
     newCard.classList.add("book");
     bookShelf.appendChild(newCard);
@@ -215,15 +227,29 @@ function createBookElement(libraryIndex) {
 
 // Toggle book read
 function toggleRead(e) {
-    console.log("working");
+    const bookIndex = getBookIndex(this);
+    const bookObject = library.at(bookIndex);
+    if (bookObject.read) {
+        bookObject.read = false;
+        this.setAttribute("is-read", "false");
+        this.innerHTML = "Unread";
+    } else {
+        bookObject.read = true;
+        this.setAttribute("is-read", "true");
+        this.innerHTML = "Read";
+    }
 }
 
 // Remove book from library
 function removeBook(e) {
-    const bookCard = this.parentNode.parentNode;  // Get book card
-    const bookIndex = bookCard.getAttribute("lib-index");  // Get library index
+    const bookIndex = getBookIndex(this);
     library.splice(bookIndex, 1);  // Remove from library
     updateBookshelf();
+}
+
+function getBookIndex(element) {
+    const bookCard = element.parentNode.parentNode;  // Get book card
+    return bookCard.getAttribute("lib-index");  // Return library index
 }
 
 /*
