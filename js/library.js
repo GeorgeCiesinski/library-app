@@ -4,6 +4,7 @@ Dark Mode
 
 const darkModeToggle = document.querySelector(".toggle-switch>label>input");
 
+// Sets data-theme attribute to light or dark
 function switchTheme(e) {
     if (e.target.checked) {
         document.documentElement.setAttribute("data-theme", "dark");
@@ -23,6 +24,7 @@ if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').match
 /*
 Modal
 */
+
 const modal = document.querySelector("#book-modal");
 const btnAddBook = document.querySelector("#add-book");
 const btnClose = document.querySelector("#close");
@@ -109,10 +111,11 @@ function book(title, isbn, read) {
 // Adds book to library
 book.prototype.addToLibrary = async function() {
 
+    // If ISBN provided, tries to fetch book data
     if (this.isbn) {
         const url = "https://openlibrary.org/isbn/" + this.isbn + ".json";
 
-        // Fetches information from Open Library
+        // Fetch from Open Library
         fetch(url)
             .then((response) => {
                 if (!response.ok) {
@@ -126,19 +129,22 @@ book.prototype.addToLibrary = async function() {
                 this.title = bookData.title;  // Overwrites title with accurate title
                 this.cover = "https://covers.openlibrary.org/b/id/" + bookData.covers[0] + "-L.jpg"
                 this.data = bookData;  // Saves book data in library
-                library.push(this);
+                // Add to library array and updates bookshelf
+                library.push(this);  
                 updateBookshelf();
             })
             .catch((error) => {
+                // Log error and display alert
                 console.error("Failed to fetch book data:", error)
                 window.alert("Failed to fetch book information from Open Library. Check that the ISBN is correct.")
             });
     } else if (!this.isbn && this.title) {
-        // If no ISBN, push data as is
+        // If no ISBN provided, push data as entered by user
         library.push(this);
         updateBookshelf();
     }
     else if (!this.isbn && !this.title) {
+        // If no title or ISBN provided, do not add book and display alert
         window.alert("You must provide an ISBN or a title to add a book.")
     }
     
@@ -164,6 +170,7 @@ function clearBookshelf() {
 // Creates a new book element
 function createBookElement(libraryIndex) {
 
+    // Get book data from library array
     const book = library.at(libraryIndex);
 
     // Create card base element
@@ -267,6 +274,7 @@ function removeBook(e) {
     updateBookshelf();
 }
 
+// Returns book index in library
 function getBookIndex(element) {
     const bookCard = element.parentNode.parentNode.parentNode;  // Get book card
     return bookCard.getAttribute("lib-index");  // Return library index
