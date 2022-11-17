@@ -1,10 +1,12 @@
 # library-app
 Library app built as an assignment for The Odin Project 
 
+<img src="images/light-mode.png" alt="Light-mode" width="700"/>
+
 ## Project Information
 This app makes use of object constructors to create new books and load them into the bookshelf. 
 
-## Functions
+## Features
 
 ### Track Books
 Add and remove books from the library by providing a title, ISBN, or both. The Read/Unread button allows you to keep track of whether the book has been read or not. 
@@ -12,8 +14,18 @@ Add and remove books from the library by providing a title, ISBN, or both. The R
 ### Dark/Light mode toggle
 The dark/light mode toggles the color scheme of the website to make it easier on the eyes when viewed in the dark. 
 
+<img src="images/dark-mode.png" alt="Dark-mode" width="400"/>
+
+### Detects User Preference
+The app detects whether the user is using dark/light mode on their computer and adjusts to match this automatically. It can still be toggled afterwards. 
+
 ### Fetch Info from Open Library
 Books can be added using an ISBN only. Using an ISBN allows the Library App to fetch the title and cover from Open Library so it can be displayed in the app.
+
+### Responsive Layout
+The app resizes the books depending on the screen it is viewed in. 
+
+<img src="images/wide-screen.png" alt="Wide-screen" width="400"/>
 
 ## How to Run this Locally
 Simply clone the repo and open `index.html`. 
