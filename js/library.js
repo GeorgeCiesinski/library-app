@@ -74,7 +74,6 @@ const bookShelf = document.querySelector("#book-shelf");
 formBookInfo.addEventListener("submit", function(e) {
     e.preventDefault();  // Prevent form from submitting
     const formObject = getData(e.target);
-    console.log(formObject);
     const newBook = new book(formObject.title, formObject.isbn, formObject.read);
     newBook.addToLibrary();
     hideModal();
@@ -134,7 +133,7 @@ book.prototype.addToLibrary = async function() {
             })
             .catch((error) => {
                 // Log error and display alert
-                console.error("Failed to fetch book data:", error)
+                console.warn("Failed to fetch book data:", error)
                 window.alert("Failed to fetch book information from Open Library. Check that the ISBN is correct.")
             });
     } else if (!this.isbn && this.title) {
@@ -253,16 +252,16 @@ function createBookElement(libraryIndex) {
 
 // Toggle book read
 function toggleRead(e) {
-    const bookIndex = getBookIndex(this);
+    const bookIndex = getBookIndex(e.currentTarget);
     const bookObject = library.at(bookIndex);
     if (bookObject.read) {
         bookObject.read = false;
-        this.setAttribute("is-read", "false");
-        this.innerHTML = "Unread";
+        e.currentTarget.setAttribute("is-read", "false");
+        e.currentTarget.innerHTML = "Unread";
     } else {
         bookObject.read = true;
-        this.setAttribute("is-read", "true");
-        this.innerHTML = "Read";
+        e.currentTarget.setAttribute("is-read", "true");
+        e.currentTarget.innerHTML = "Read";
     }
 }
 
