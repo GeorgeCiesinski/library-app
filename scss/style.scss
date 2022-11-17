@@ -26,6 +26,7 @@
     // Generated colors using https://javisperez.github.io/tailwindcolorshades/?monza=DC2626&emerald=22C55E&picton-blue=38BDF8&minsk=312E81
 }
 
+// Dark color theme
 [data-theme="dark"] {
     --fh-color: #18173f;
     --fh-font-color: #cccbe0;
@@ -339,12 +340,29 @@ main {
     text-transform: uppercase;
 }
 
+// If is-read true, add green color to button
 button[is-read="true"] {
     background-color: var(--read-color);
     border: 2px solid var(--read-color);
+    transition: 0.3s;
+}
+button[is-read="true"]:hover {
+    opacity: 80%;
 }
 
+button[is-read="false"] {
+    transition: 0.3s;
+}
+button[is-read="false"]:hover {
+    opacity: 80%;
+}
+
+// Remove button is red
 button.remove {
     background-color: var(--remove-color);
     border: 2px solid var(--remove-color);
+    transition: 0.3s;
+}
+button.remove:hover {
+    opacity: 80%;
 }
