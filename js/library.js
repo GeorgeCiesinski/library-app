@@ -128,7 +128,6 @@ book.prototype.addToLibrary = async function() {
             .then((bookData) => {
                 this.title = bookData.title;  // Overwrites title with accurate title
                 this.cover = "https://covers.openlibrary.org/b/id/" + bookData.covers[0] + "-L.jpg"
-                this.data = bookData;  // Saves book data in library
                 // Add to library array and updates bookshelf
                 library.push(this);  
                 updateBookshelf();
