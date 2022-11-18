@@ -28,7 +28,7 @@ The app resizes the books depending on the screen it is viewed in.
 <img src="images/wide-screen.png" alt="Wide-screen" width="400"/>
 
 ## How to Run this Locally
-Simply clone the repo and open `index.html`. 
+Simply clone the repo and open `index.html` in your browser of choice. 
 
 ## Problems Encountered & Solutions
 
